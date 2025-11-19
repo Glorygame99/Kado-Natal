@@ -16,12 +16,14 @@
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      overflow: hidden; /* Menghindari scroll */
     }
 
     .container {
       width: 80%;
       max-width: 600px;
       margin: 0 auto;
+      z-index: 2;
     }
 
     h1 {
@@ -29,6 +31,7 @@
       margin-bottom: 20px;
     }
 
+    /* Background tetap dan tidak bergerak */
     .snow {
       position: fixed;
       top: 0;
@@ -38,13 +41,9 @@
       height: 100%;
       background-image: url('backgroundnatal.jpg'); /* Ganti dengan gambar yang diunggah */
       background-size: cover;
-      animation: snow 20s linear infinite;
+      background-attachment: fixed; /* Pastikan background tidak bergerak */
       opacity: 0.6;
-    }
-
-    @keyframes snow {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 1000px; }
+      z-index: 1;
     }
 
     .grid {
