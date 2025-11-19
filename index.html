@@ -29,6 +29,7 @@
       animation: snow 20s linear infinite;
       opacity: 0.6;
     }
+
     @keyframes snow {
       0% { background-position: 0 0; }
       100% { background-position: 0 1000px; }
@@ -141,7 +142,7 @@
         box.classList.add('revealed');
         box.textContent = hadiah.nama;
       } else {
-        alert("Kode salah!");
+        alert("Kode salah! Coba lagi.");
       }
     }
 
