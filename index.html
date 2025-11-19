@@ -40,7 +40,7 @@
       width: 100%;
       height: 100%;
       background-image: url('backgroundnatal.jpg'); /* Ganti dengan gambar yang diunggah */
-      background-size: cover; /* Pastikan gambar mengisi seluruh layar */
+      background-size: cover;
       background-attachment: fixed; /* Pastikan background tidak bergerak */
       opacity: 0.6;
       z-index: 1;
@@ -90,6 +90,11 @@
 
     button:disabled {
       background-color: #888;
+    }
+
+    /* CSS untuk menyembunyikan tombol */
+    .hidden {
+      display: none;
     }
   </style>
 </head>
@@ -159,10 +164,17 @@
 
     // Fungsi untuk menampilkan semua hadiah
     showAllBtn.onclick = () => {
+      // Sembunyikan tombol Tampilkan Semua Hadiah
+      showAllBtn.classList.add("hidden");
+
+      // Ungkapkan semua hadiah
       document.querySelectorAll(".box").forEach((box, i) => {
         box.classList.add("revealed");
         box.textContent = hadiahList[i].nama;
       });
+
+      // Tampilkan tombol Mulai
+      startBtn.classList.remove("hidden");
     };
   </script>
 </body>
