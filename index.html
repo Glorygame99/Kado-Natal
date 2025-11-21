@@ -2,30 +2,36 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<title>Mystery Box Natal Premium</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mystery Box Natal</title>
-
 <style>
     body {
-        font-family: Arial, sans-serif;
-        background: #f0f4ff;
-        text-align: center;
-        padding: 15px;
         margin: 0;
+        font-family: 'Poppins', sans-serif;
+        background: linear-gradient(135deg, #d62828, #f77f00, #fcbf49);
+        background-size: 300% 300%;
+        animation: gradient 10s ease infinite;
+        text-align: center;
+        color: #fff;
+        padding: 20px;
+    }
+
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
 
     h1 {
-        color: #d62828;
-        margin-bottom: 8px;
-        font-size: 1.6rem;
+        font-size: 28px;
+        margin-top: 10px;
+        text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
     }
 
     p {
-        font-size: 1rem;
-        color: #333;
+        margin-bottom: 15px;
     }
 
-    /* GRID RESPONSIF */
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
@@ -35,28 +41,30 @@
         margin: 20px auto;
     }
 
-    /* BOX RESPONSIF */
     .box {
         background: url('https://i.imgur.com/4bX8z6X.png');
         background-size: cover;
-        background-position: center;
         width: 100%;
-        aspect-ratio: 1 / 1; /* persegi otomatis */
-        border-radius: 10px;
+        padding-bottom: 100%;
+        border-radius: 12px;
+        position: relative;
         cursor: pointer;
-        transition: .3s;
+        transition: 0.3s;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
     }
 
-    .box:hover {
-        transform: scale(1.06);
+    .box:active {
+        transform: scale(0.92);
     }
 
     /* POPUP */
     #popup {
         position: fixed;
-        top: 0; left: 0;
-        width: 100%; height: 100%;
-        background: rgba(0,0,0,0.65);
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.75);
         display: none;
         justify-content: center;
         align-items: center;
@@ -65,34 +73,41 @@
 
     #popup-content {
         background: #fff;
+        width: 90%;
+        max-width: 350px;
+        border-radius: 16px;
         padding: 25px;
-        border-radius: 10px;
-        width: 100%;
-        max-width: 320px;
         text-align: center;
-        box-sizing: border-box;
+        color: #333;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+        animation: pop 0.3s ease;
+    }
+
+    @keyframes pop {
+        0% { transform: scale(0.5); opacity: 0; }
+        100% { transform: scale(1); opacity: 1; }
     }
 
     input {
-        padding: 10px;
-        width: 100%;
-        border-radius: 6px;
+        padding: 12px;
+        width: 92%;
+        border-radius: 10px;
         border: 1px solid #aaa;
-        font-size: 1rem;
-        box-sizing: border-box;
         margin-top: 10px;
+        font-size: 16px;
     }
 
     button {
         margin-top: 15px;
-        padding: 10px 20px;
+        padding: 12px 20px;
         width: 100%;
         border: none;
         background: #d62828;
-        color: #fff;
-        border-radius: 6px;
+        color: white;
+        font-size: 16px;
+        border-radius: 10px;
         cursor: pointer;
-        font-size: 1rem;
+        transition: 0.2s;
     }
 
     button:hover {
@@ -100,11 +115,10 @@
     }
 </style>
 </head>
-
 <body>
 
 <h1>🎄 Mystery Box Hadiah Natal 🎁</h1>
-<p>Klik salah satu box untuk membuka hadiahmu!</p>
+<p>Ketuk salah satu box untuk membuka hadiahmu!</p>
 
 <div class="grid">
     <div class="box" onclick="openBox()"></div>
@@ -118,35 +132,35 @@
     <div class="box" onclick="openBox()"></div>
 </div>
 
-
 <!-- POPUP -->
 <div id="popup">
     <div id="popup-content">
-        <h3>Masukkan Kode Hadiah</h3>
-        <input type="text" id="kodeInput" placeholder="Contoh: XMAS123">
-        <button onclick="cekKode()">Cek Hadiah</button>
-        <button onclick="tutupPopup()" style="background:#666;margin-top:8px;">Tutup</button>
+        <h2>Masukkan Kode Hadiah</h2>
+        <input type="text" id="kodeInput" placeholder="Contoh: XMAS01">
+        <button onclick="cekKode()">CEK HADIAH</button>
+        <button onclick="tutupPopup()" style="background:#555;margin-top:6px;">Tutup</button>
     </div>
 </div>
 
 <script>
-// ===============================
-// DAFTAR KODE & HADIAH  
-// ===============================
+// =========================
+// KODE → HADIAH
+// Edit sesuka hati
+// =========================
 const hadiah = {
     "XMAS01": "Hadiah 50.000 🎁",
-    "XMAS02": "Hadiah 100.000 🎁",
-    "XMAS03": "Hadiah 150.000 🎁",
+    "XMAS02": "Hadiah 100.000 🔔",
+    "XMAS03": "Hadiah 150.000 🎉",
     "NATALA": "Boneka Natal 🧸",
-    "NATALB": "Voucher Belanja Rp 75.000 🛍️",
-    "SANTA77": "Powerbank Spesial 🎅",
-    "BOXVIP": "Smartwatch ⭐",
+    "NATALB": "Voucher Belanja 75.000 🛍️",
+    "SANTA77": "Powerbank 🎅",
+    "BOXVIP": "Smartwatch Premium ⭐",
     "HADIAH9": "Hadiah 25.000 💝"
 };
 
-// ===============================
-// FUNGSI POPUP
-// ===============================
+// =========================
+// POPUP CONTROL
+// =========================
 function openBox() {
     document.getElementById("popup").style.display = "flex";
 }
@@ -155,9 +169,9 @@ function tutupPopup() {
     document.getElementById("popup").style.display = "none";
 }
 
-// ===============================
-// FUNGSI CEK KODE
-// ===============================
+// =========================
+// CEK KODE
+// =========================
 function cekKode() {
     let kode = document.getElementById("kodeInput").value.trim().toUpperCase();
 
@@ -165,7 +179,7 @@ function cekKode() {
         alert("🎉 SELAMAT!\nKode: " + kode + "\nHadiah: " + hadiah[kode]);
         tutupPopup();
     } else {
-        alert("❌ Kode tidak ditemukan atau salah.");
+        alert("❌ Kode salah atau tidak terdaftar.");
     }
 }
 </script>
