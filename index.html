@@ -1,251 +1,150 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KADO NATAL GLORYGAME99</title>
-  <style>
+<meta charset="UTF-8">
+<title>Mystery Box Natal</title>
+<style>
     body {
-      background: #000;
-      color: #fff;
-      font-family: 'Arial', sans-serif;
-      text-align: center;
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
+        font-family: Arial, sans-serif;
+        background: #f0f4ff;
+        text-align: center;
+        padding: 20px;
     }
-
-    .container {
-      width: 80%;
-      max-width: 600px;
-      margin: 0 auto;
-      z-index: 2;
-    }
-
     h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
+        color: #d62828;
+        margin-bottom: 10px;
     }
-
-    .snow {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      width: 100%;
-      height: 100%;
-      background-image: url('backgroundnatal.jpg'); /* Ganti dengan gambar yang diunggah */
-      background-size: cover;
-      background-attachment: fixed; /* Pastikan background tidak bergerak */
-      opacity: 0.6;
-      z-index: 1;
-    }
-
     .grid {
-      display: grid;
-      grid-template-columns: repeat(3, 100px);
-      grid-gap: 10px;
-      justify-content: center;
-      margin-bottom: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 15px;
+        max-width: 500px;
+        margin: 25px auto;
     }
-
     .box {
-      width: 100px;
-      height: 100px;
-      background: #333;
-      border: 2px solid #555;
-      border-radius: 10px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 1.5rem;
-      color: #fff;
-      cursor: not-allowed;
+        background: url('https://i.imgur.com/4bX8z6X.png');
+        background-size: cover;
+        width: 150px;
+        height: 150px;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+    .box:hover {
+        transform: scale(1.08);
     }
 
-    .box.active {
-      cursor: pointer;
-      background: #444;
+    #popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.65);
+        display: none;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #popup-content {
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+    }
+
+    input {
+        padding: 10px;
+        width: 90%;
+        margin-top: 10px;
+        border-radius: 6px;
+        border: 1px solid #aaa;
     }
 
     button {
-      padding: 10px 15px;
-      background-color: #ff6600;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      margin: 10px;
-      cursor: pointer;
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #d62828;
+        color: #fff;
+        border-radius: 6px;
+        cursor: pointer;
     }
 
     button:hover {
-      background-color: #ff8533;
+        background: #a4161a;
     }
 
-    button:disabled {
-      background-color: #888;
-    }
-
-    /* CSS untuk menyembunyikan tombol */
-    .hidden {
-      display: none;
-    }
-
-    /* Styling untuk halaman input kode tiket */
-    .ticket-form {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 20px;
-    }
-
-    .ticket-form input {
-      padding: 10px;
-      font-size: 1rem;
-      border: 2px solid #555;
-      border-radius: 5px;
-      color: #333;
-      width: 200px;
-      margin-right: 10px;
-    }
-
-    .ticket-form button {
-      padding: 10px 15px;
-      background-color: #ff6600;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      margin-top: 10px;
-      cursor: pointer;
-    }
-
-    .ticket-form button:hover {
-      background-color: #ff8533;
-    }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Halaman untuk memilih antara mulai dan menampilkan hadiah -->
-  <div id="mainPage">
-    <h1>🎁 KADO NATAL GLORYGAME99 🎁</h1>
-    <button id="startBtn">Mulai</button>
-    <button id="showAllBtn">Tampilkan Semua Hadiah</button>
-  </div>
+<h1>🎄 Mystery Box Hadiah Natal 🎁</h1>
+<p>Klik salah satu box untuk membuka hadiahmu!</p>
 
-  <!-- Halaman untuk memasukkan kode tiket -->
-  <div id="ticketPage" class="hidden">
-    <div class="ticket-form">
-      <h2>Silahkan Masukkan Kode Tiket</h2>
-      <input type="text" id="ticketCode" placeholder="Ticket Code" />
-      <button id="startTicketBtn">Mulai</button>
+<div class="grid">
+    <div class="box" onclick="openBox()"></div>
+    <div class="box" onclick="openBox()"></div>
+    <div class="box" onclick="openBox()"></div>
+    <div class="box" onclick="openBox()"></div>
+    <div class="box" onclick="openBox()"></div>
+    <div class="box" onclick="openBox()"></div>
+    <div class="box" onclick="openBox()"></div>
+    <div class="box" onclick="openBox()"></div>
+    <div class="box" onclick="openBox()"></div>
+</div>
+
+<div id="popup">
+    <div id="popup-content">
+        <h3>Masukkan Kode Hadiah</h3>
+        <input type="text" id="kodeInput" placeholder="Contoh: XMAS123">
+        <button onclick="cekKode()">Cek Hadiah</button>
+        <button onclick="tutupPopup()" style="background:#666;margin-top:5px;">Tutup</button>
     </div>
-  </div>
+</div>
 
-  <!-- Halaman Permainan Hadiah -->
-  <div id="gamePage" class="hidden">
-    <div class="snow"></div>
-    <div class="container">
-      <h1>🎁 Game Hadiah 3x3 🎁</h1>
-      <div class="grid" id="grid"></div>
-      <div class="controls">
-        <button id="showAllBtnGame">Tampilkan Semua Hadiah</button>
-      </div>
-    </div>
-  </div>
+<script>
+// ===============================
+// DAFTAR KODE & HADIAH  
+// Edit bagian ini sesuai kebutuhan kamu
+// ===============================
+const hadiah = {
+    "XMAS01": "Hadiah 50.000 🎁",
+    "XMAS02": "Hadiah 100.000 🎁",
+    "XMAS03": "Hadiah 150.000 🎁",
+    "NATALA": "Hadiah Boneka Natal 🧸",
+    "NATALB": "Hadiah Voucher Belanja Rp 75.000 🛍️",
+    "SANTA77": "Hadiah Spesial: Powerbank 🎅",
+    "BOXVIP": "Hadiah Utama: Smartwatch ⭐",
+    "HADIAH9": "Hadiah 25.000 💝"
+};
 
-  <script>
-    const hadiahList = [
-      { nama: "Voucher 10%", kode: "HDH-10A" },
-      { nama: "Diskon 25%", kode: "HDH-25B" },
-      { nama: "Hadiah Misterius", kode: "HDH-MST" },
-      { nama: "Gratis Ongkir", kode: "HDH-ONG" },
-      { nama: "Voucher Rp50.000", kode: "HDH-50K" },
-      { nama: "Merch Eksklusif", kode: "HDH-MCH" },
-      { nama: "Voucher 15%", kode: "HDH-15C" },
-      { nama: "Hadiah Spesial", kode: "HDH-SPC" },
-      { nama: "Kejutan Besar", kode: "HDH-BIG" }
-    ];
+// ===============================
+// FUNGSI POPUP
+// ===============================
+function openBox() {
+    document.getElementById("popup").style.display = "flex";
+}
 
-    const grid = document.getElementById("grid");
-    const startBtn = document.getElementById("startBtn");
-    const showAllBtn = document.getElementById("showAllBtn");
-    const startPage = document.getElementById("mainPage");
-    const ticketPage = document.getElementById("ticketPage");
-    const gamePage = document.getElementById("gamePage");
-    const startTicketBtn = document.getElementById("startTicketBtn");
-    const showAllBtnGame = document.getElementById("showAllBtnGame");
+function tutupPopup() {
+    document.getElementById("popup").style.display = "none";
+}
 
-    const correctTicketCode = "GACOR77";
+// ===============================
+// FUNGSI CEK KODE
+// ===============================
+function cekKode() {
+    let kode = document.getElementById("kodeInput").value.trim().toUpperCase();
 
-    // Fungsi untuk menampilkan halaman kode tiket
-    startBtn.onclick = function() {
-      startPage.style.display = "none";  // Sembunyikan halaman awal
-      ticketPage.style.display = "block"; // Tampilkan halaman input kode tiket
-    };
-
-    // Fungsi untuk memverifikasi tiket dan menampilkan halaman permainan
-    startTicketBtn.onclick = function() {
-      const ticketCode = document.getElementById("ticketCode").value;
-
-      if (ticketCode === correctTicketCode) {
-        ticketPage.style.display = "none"; // Sembunyikan halaman kode tiket
-        gamePage.style.display = "block";  // Tampilkan halaman permainan
-        startGame();
-      } else {
-        alert("Kode tiket salah! Coba lagi.");
-      }
-    };
-
-    // Fungsi untuk memulai game
-    function startGame() {
-      // Buat kotak hadiah
-      hadiahList.forEach((item, index) => {
-        const div = document.createElement("div");
-        div.classList.add("box");
-        div.dataset.index = index;
-        div.textContent = "🎁";
-        div.onclick = () => revealBox(div);
-        grid.appendChild(div);
-      });
+    if (hadiah[kode]) {
+        alert("🎉 SELAMAT!\nKode: " + kode + "\nHadiah: " + hadiah[kode]);
+        tutupPopup();
+    } else {
+        alert("❌ Kode tidak ditemukan atau salah.");
     }
-
-    // Fungsi untuk mengungkap hadiah setelah kode klaim dimasukkan
-    function revealBox(box) {
-      const hadiah = hadiahList[box.dataset.index];
-      const kodeInput = prompt(`Masukkan kode untuk klaim hadiah ini:`);
-
-      if (kodeInput === hadiah.kode) {
-        box.classList.add("revealed");
-        box.textContent = hadiah.nama;
-      } else {
-        alert("Kode salah! Coba lagi.");
-      }
-    }
-
-    // Fungsi untuk menampilkan semua hadiah
-    showAllBtnGame.onclick = function() {
-      document.querySelectorAll(".box").forEach((box, i) => {
-        box.classList.add("revealed");
-        box.textContent = hadiahList[i].nama;
-      });
-      showAllBtnGame.classList.add("hidden");
-    };
-
-    // Fungsi untuk menampilkan semua hadiah dan menyembunyikan tombol
-    showAllBtn.onclick = function() {
-      document.querySelectorAll(".box").forEach((box, i) => {
-        box.classList.add("revealed");
-        box.textContent = hadiahList[i].nama;
-      });
-      showAllBtn.classList.add("hidden");
-    };
-  </script>
+}
+</script>
 
 </body>
 </html>
