@@ -2,82 +2,105 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mystery Box Natal</title>
+
 <style>
     body {
         font-family: Arial, sans-serif;
         background: #f0f4ff;
         text-align: center;
-        padding: 20px;
+        padding: 15px;
+        margin: 0;
     }
+
     h1 {
         color: #d62828;
-        margin-bottom: 10px;
+        margin-bottom: 8px;
+        font-size: 1.6rem;
     }
+
+    p {
+        font-size: 1rem;
+        color: #333;
+    }
+
+    /* GRID RESPONSIF */
     .grid {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
-        gap: 15px;
-        max-width: 500px;
-        margin: 25px auto;
+        gap: 12px;
+        width: 100%;
+        max-width: 420px;
+        margin: 20px auto;
     }
+
+    /* BOX RESPONSIF */
     .box {
         background: url('https://i.imgur.com/4bX8z6X.png');
         background-size: cover;
-        width: 150px;
-        height: 150px;
-        border-radius: 12px;
+        background-position: center;
+        width: 100%;
+        aspect-ratio: 1 / 1; /* persegi otomatis */
+        border-radius: 10px;
         cursor: pointer;
-        transition: 0.3s;
-    }
-    .box:hover {
-        transform: scale(1.08);
+        transition: .3s;
     }
 
+    .box:hover {
+        transform: scale(1.06);
+    }
+
+    /* POPUP */
     #popup {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
         background: rgba(0,0,0,0.65);
         display: none;
         justify-content: center;
         align-items: center;
+        padding: 20px;
     }
 
     #popup-content {
         background: #fff;
-        padding: 30px;
+        padding: 25px;
         border-radius: 10px;
-        width: 300px;
+        width: 100%;
+        max-width: 320px;
         text-align: center;
+        box-sizing: border-box;
     }
 
     input {
         padding: 10px;
-        width: 90%;
-        margin-top: 10px;
+        width: 100%;
         border-radius: 6px;
         border: 1px solid #aaa;
+        font-size: 1rem;
+        box-sizing: border-box;
+        margin-top: 10px;
     }
 
     button {
         margin-top: 15px;
         padding: 10px 20px;
+        width: 100%;
         border: none;
         background: #d62828;
         color: #fff;
         border-radius: 6px;
         cursor: pointer;
+        font-size: 1rem;
     }
 
     button:hover {
         background: #a4161a;
     }
-
 </style>
 </head>
+
 <body>
 
 <h1>🎄 Mystery Box Hadiah Natal 🎁</h1>
@@ -95,28 +118,29 @@
     <div class="box" onclick="openBox()"></div>
 </div>
 
+
+<!-- POPUP -->
 <div id="popup">
     <div id="popup-content">
         <h3>Masukkan Kode Hadiah</h3>
         <input type="text" id="kodeInput" placeholder="Contoh: XMAS123">
         <button onclick="cekKode()">Cek Hadiah</button>
-        <button onclick="tutupPopup()" style="background:#666;margin-top:5px;">Tutup</button>
+        <button onclick="tutupPopup()" style="background:#666;margin-top:8px;">Tutup</button>
     </div>
 </div>
 
 <script>
 // ===============================
 // DAFTAR KODE & HADIAH  
-// Edit bagian ini sesuai kebutuhan kamu
 // ===============================
 const hadiah = {
     "XMAS01": "Hadiah 50.000 🎁",
     "XMAS02": "Hadiah 100.000 🎁",
     "XMAS03": "Hadiah 150.000 🎁",
-    "NATALA": "Hadiah Boneka Natal 🧸",
-    "NATALB": "Hadiah Voucher Belanja Rp 75.000 🛍️",
-    "SANTA77": "Hadiah Spesial: Powerbank 🎅",
-    "BOXVIP": "Hadiah Utama: Smartwatch ⭐",
+    "NATALA": "Boneka Natal 🧸",
+    "NATALB": "Voucher Belanja Rp 75.000 🛍️",
+    "SANTA77": "Powerbank Spesial 🎅",
+    "BOXVIP": "Smartwatch ⭐",
     "HADIAH9": "Hadiah 25.000 💝"
 };
 
