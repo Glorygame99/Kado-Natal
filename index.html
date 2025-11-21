@@ -13,18 +13,25 @@
         text-align: center;
         color: #fff;
         padding: 20px;
+        overflow-x: hidden;
     }
 
-    @keyframes gradient {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
+    canvas#snowCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
     }
 
     h1 {
         font-size: 28px;
         margin-top: 10px;
         text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+        position: relative;
+        z-index: 10;
     }
 
     .grid {
@@ -34,6 +41,8 @@
         width: 100%;
         max-width: 420px;
         margin: 20px auto;
+        position: relative;
+        z-index: 10;
     }
 
     .box {
@@ -70,6 +79,7 @@
         justify-content: center;
         align-items: center;
         padding: 20px;
+        z-index: 10;
     }
 
     #popup-content {
@@ -143,6 +153,9 @@
     </div>
 </div>
 
+<!-- CANVAS SALJU -->
+<canvas id="snowCanvas"></canvas>
+
 <script>
 // =========================
 // KODE → HADIAH
@@ -167,7 +180,7 @@ function clickBox(el) {
     setTimeout(() => {
         el.classList.remove("spin");
         document.getElementById("popup").style.display = "flex";
-    }, 900); // waktu spin
+    }, 900);
 }
 
 // =========================
@@ -190,6 +203,82 @@ function cekKode() {
         alert("❌ Kode tidak valid.");
     }
 }
+
+// =========================
+// SALJU BINTANG KRISTAL
+// =========================
+const canvas = document.getElementById('snowCanvas');
+const ctx = canvas.getContext('2d');
+let W = canvas.width = window.innerWidth;
+let H = canvas.height = window.innerHeight;
+
+window.addEventListener('resize', () => {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+});
+
+// Membuat partikel bintang
+let numStars = 80;
+let stars = [];
+
+function random(min, max){ return Math.random()*(max-min)+min; }
+
+function createStars() {
+    for(let i=0;i<numStars;i++){
+        stars.push({
+            x: random(0,W),
+            y: random(0,H),
+            r: random(1,3),
+            speed: random(0.5,1.5),
+            alpha: random(0.3,1),
+            shine: Math.random()
+        });
+    }
+}
+createStars();
+
+function drawStar(x, y, r) {
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.beginPath();
+    for(let i=0;i<5;i++){
+        ctx.lineTo(0, -r);
+        ctx.rotate(Math.PI/5);
+        ctx.lineTo(0, -r/2);
+        ctx.rotate(Math.PI/5);
+    }
+    ctx.closePath();
+    ctx.fillStyle = 'rgba(255,255,255,1)';
+    ctx.fill();
+    ctx.restore();
+}
+
+function drawSnow() {
+    ctx.clearRect(0,0,W,H);
+    for(let i=0;i<numStars;i++){
+        let s = stars[i];
+        // Kilau bintang
+        s.alpha += (Math.random()-0.5)*0.05;
+        if(s.alpha>1) s.alpha=1;
+        if(s.alpha<0.3) s.alpha=0.3;
+        ctx.globalAlpha = s.alpha;
+
+        drawStar(s.x, s.y, s.r);
+
+        // Gerakan jatuh
+        s.y += s.speed;
+        s.x += Math.sin(s.y * 0.01) * 1.5;
+
+        if(s.y>H) {
+            s.y=-10;
+            s.x=random(0,W);
+        }
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(drawSnow);
+}
+
+drawSnow();
 </script>
 
 </body>
